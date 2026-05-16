@@ -1,0 +1,6 @@
+$ docker run -d -p 8080:80 --name welcome docker/welcome-to-docker
+b3e93e40be3a
+
+$ docker ps --filter "name=welcome" --format 'table {{.Names}}	{{.Status}}	{{.Ports}}'
+NAMES          STATUS         PORTS
+welcome-sync   Up 2 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
