@@ -1,0 +1,5 @@
+Watch enabled
+Syncing service "web" after 1 changes were detected
+ Container ch06-nginx-restart-web-1 Restarting 
+ Container ch06-nginx-restart-web-1 Started 
+service(s) ["web"] restarted

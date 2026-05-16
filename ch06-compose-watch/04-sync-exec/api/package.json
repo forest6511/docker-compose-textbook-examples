@@ -1,0 +1,8 @@
+{
+  "name": "ch06-sync-exec-api",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}

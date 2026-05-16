@@ -1,0 +1,13 @@
+name: ch06-nginx-restart
+
+services:
+  web:
+    build:
+      context: ./web
+    ports:
+      - "8081:80"
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./web/nginx.conf
+          target: /etc/nginx/nginx.conf

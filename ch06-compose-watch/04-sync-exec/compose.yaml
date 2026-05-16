@@ -1,0 +1,22 @@
+name: ch06-sync-exec
+
+services:
+  api:
+    build:
+      context: ./api
+    command: node src/server.js
+    ports:
+      - "3001:3000"
+    develop:
+      watch:
+        - action: sync
+          path: ./api/src
+          target: /app/src
+          ignore:
+            - node_modules/
+        - action: sync+exec
+          path: ./api/schema.txt
+          target: /app/schema.txt
+          exec:
+            command: ["node", "scripts/regen.js"]
+            working_dir: /app
