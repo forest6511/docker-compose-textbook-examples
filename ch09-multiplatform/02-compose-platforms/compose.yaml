@@ -1,0 +1,10 @@
+name: ch09-compose-platforms
+
+services:
+  app:
+    build:
+      context: .
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    image: ch09-compose-platforms:local

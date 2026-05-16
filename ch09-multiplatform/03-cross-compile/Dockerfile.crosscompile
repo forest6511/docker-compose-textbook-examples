@@ -1,0 +1,12 @@
+# syntax=docker/dockerfile:1
+# cross-compile 版: build stage は BUILDPLATFORM 固定で軽い
+FROM --platform=$BUILDPLATFORM golang:1.24-alpine AS build
+ARG TARGETOS
+ARG TARGETARCH
+WORKDIR /app
+COPY main.go ./
+RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o /out/hello main.go
+
+FROM alpine
+COPY --from=build /out/hello /usr/local/bin/hello
+CMD ["/usr/local/bin/hello"]

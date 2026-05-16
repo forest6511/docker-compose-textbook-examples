@@ -1,0 +1,10 @@
+# syntax=docker/dockerfile:1
+# QEMU emulation 版: build stage が TARGETPLATFORM で動く = 重い
+FROM golang:1.24-alpine AS build
+WORKDIR /app
+COPY main.go ./
+RUN go build -o /out/hello main.go
+
+FROM alpine
+COPY --from=build /out/hello /usr/local/bin/hello
+CMD ["/usr/local/bin/hello"]
