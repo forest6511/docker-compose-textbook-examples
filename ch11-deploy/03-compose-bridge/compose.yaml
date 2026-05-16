@@ -1,0 +1,28 @@
+name: ch11-bridge-demo
+
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    environment:
+      APP_ENV: production
+
+  api:
+    image: ghcr.io/example/api:1.0
+    environment:
+      DATABASE_URL: postgres://db:5432/app
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_PASSWORD: change-me
+      POSTGRES_DB: app
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
