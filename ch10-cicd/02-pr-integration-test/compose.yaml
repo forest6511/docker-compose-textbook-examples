@@ -1,0 +1,23 @@
+name: ch10-02-pr-test
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_PASSWORD: change-me
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app"]
+      interval: 3s
+      timeout: 3s
+      retries: 8
+      start_period: 5s
+
+  app:
+    build:
+      context: .
+    image: ch10-pr-test:local
+    depends_on:
+      db:
+        condition: service_healthy
