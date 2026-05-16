@@ -1,0 +1,14 @@
+name: case06-mailhog
+
+services:
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  app:
+    image: alpine
+    command: sh -c "echo send via smtp://mailhog:1025 && sleep 3600"
+    depends_on:
+      - mailhog

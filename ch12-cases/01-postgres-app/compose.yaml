@@ -1,0 +1,28 @@
+name: case01-postgres-app
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_PASSWORD: change-me
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: alpine
+    command: sh -c "echo connect to postgres at db:5432 && sleep 3600"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:

@@ -1,0 +1,43 @@
+name: case20-fullstack
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_PASSWORD: change-me
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app"]
+      interval: 5s
+      retries: 5
+
+  cache:
+    image: redis:7-alpine
+    command: redis-server --requirepass change-me
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - "8025:8025"
+
+  adminer:
+    image: adminer:4
+    ports:
+      - "8081:8080"
+
+  app:
+    image: alpine
+    command: sh -c "echo all dev services ready && sleep 3600"
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_started
+      mailhog:
+        condition: service_started
+
+volumes:
+  db_data:

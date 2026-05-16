@@ -1,0 +1,26 @@
+name: case13-traefik
+
+services:
+  traefik:
+    image: traefik:v3
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  app1:
+    image: nginx:1.27-alpine
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.app1.rule=Host(`app1.localhost`)
+
+  app2:
+    image: nginx:1.27-alpine
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.app2.rule=Host(`app2.localhost`)
