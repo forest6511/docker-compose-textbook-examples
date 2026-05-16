@@ -1,0 +1,4 @@
+services:
+  web:
+    environment:
+      LOCAL_HACK: enabled

@@ -1,0 +1,11 @@
+name: ch07-extends-split
+
+services:
+  web-dev:
+    extends:
+      file: base-services.yaml
+      service: web-base
+    environment:
+      LOG_LEVEL: debug
+    ports:
+      - "8082:80"

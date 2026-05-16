@@ -1,0 +1,6 @@
+services:
+  web-base:
+    image: nginx:1.27-alpine
+    environment:
+      APP_NAME: webapp
+      LOG_LEVEL: info

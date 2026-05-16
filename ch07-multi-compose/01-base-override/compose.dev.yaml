@@ -1,0 +1,12 @@
+services:
+  web:
+    environment:
+      LOG_LEVEL: debug
+      DEBUG: "1"
+    ports:
+      - "8080:80"
+      - "9229:9229"
+
+  db:
+    ports:
+      - "5432:5432"

@@ -1,0 +1,21 @@
+name: ch07-base-override
+
+services:
+  web:
+    image: nginx:1.27-alpine
+    environment:
+      LOG_LEVEL: info
+      DEBUG: "0"
+    ports:
+      - "8080:80"
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_PASSWORD: change-me
+      POSTGRES_DB: app
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5

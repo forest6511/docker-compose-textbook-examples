@@ -1,0 +1,24 @@
+name: ch07-extends
+
+services:
+  web-base:
+    image: nginx:1.27-alpine
+    environment:
+      APP_NAME: webapp
+      LOG_LEVEL: info
+
+  web-dev:
+    extends: web-base
+    environment:
+      LOG_LEVEL: debug
+      EXTRA: dev-only
+    ports:
+      - "8080:80"
+
+  web-prod:
+    extends: web-base
+    environment:
+      LOG_LEVEL: warn
+    ports:
+      - "8081:80"
+    restart: always

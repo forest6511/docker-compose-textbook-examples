@@ -1,0 +1,18 @@
+services:
+  web:
+    environment:
+      LOG_LEVEL: warn
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+
+  db:
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M

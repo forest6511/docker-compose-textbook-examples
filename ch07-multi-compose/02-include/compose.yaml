@@ -1,0 +1,5 @@
+name: ch07-include
+
+include:
+  - shared/compose.yaml
+  - services/web.yaml
