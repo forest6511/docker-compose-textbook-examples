@@ -1,0 +1,30 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:3000"
+    environment:
+      DATABASE_URL: postgres://app:secret@db:5432/appdb
+      REDIS_URL: redis://cache:6379
+    depends_on:
+      - db
+      - cache
+    restart: unless-stopped
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: appdb
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d:ro
+    restart: unless-stopped
+
+  cache:
+    image: redis:7-alpine
+    restart: unless-stopped
+
+volumes:
+  db-data:
