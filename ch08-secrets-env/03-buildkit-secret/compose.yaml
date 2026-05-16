@@ -1,0 +1,13 @@
+name: ch08-03-buildkit-secret
+
+services:
+  app:
+    build:
+      context: .
+      secrets:
+        - npmrc
+    image: ch08-buildkit-secret:local
+
+secrets:
+  npmrc:
+    file: ./secrets/.npmrc

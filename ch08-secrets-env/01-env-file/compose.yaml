@@ -1,0 +1,11 @@
+name: ch08-01-env-file
+
+services:
+  web:
+    image: "nginx:${NGINX_TAG:-1.27-alpine}"
+    environment:
+      APP_ENV: "${APP_ENV:-development}"
+      LOG_LEVEL: "${LOG_LEVEL-info}"
+      DB_HOST: "${DB_HOST:?DB_HOST is required}"
+    ports:
+      - "${WEB_PORT:-8080}:80"
