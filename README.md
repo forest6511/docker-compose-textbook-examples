@@ -1,6 +1,6 @@
 # docker-compose-textbook-examples
 
-書籍『**Docker Compose の教科書 — 現場で使える基礎から CI/CD・本番デプロイまで**』(森川 陽介・著、Amazon Kindle ¥980 KU、ASIN 取得後追記)の **動作確認済みサンプルコード集** です。
+書籍『**[Docker Compose の教科書 — 現場で使える基礎から CI/CD・本番デプロイまで](https://www.amazon.co.jp/dp/B0H22MJHXL)**』(森川 陽介・著、Amazon Kindle ¥980 KU) の **動作確認済みサンプルコード集** です。
 
 本書は Docker Compose v2.40+ / Docker Desktop 4.73+ の最新仕様を主軸に、12 章 + 付録 2 で「コピペで動かしている状態」から「自分で構造を組める状態」へ橋渡しする教科書です。本リポジトリは、その全章のサンプルを「`git clone` してすぐ動く」形で揃えたものです。
 
